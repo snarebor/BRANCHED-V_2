@@ -20,7 +20,7 @@ export async function PATCH(
   const userId = (session?.user as { id?: string } | undefined)?.id;
 
   if (!userId) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
   }
 
   const parsedId = listingIdSchema.safeParse(params.id);
@@ -35,7 +35,7 @@ export async function PATCH(
   });
 
   if (!currentUser) {
-    return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    return NextResponse.json({ error: 'User not found.' }, { status: 404 });
   }
 
   if (currentUser.isBanned) {
@@ -67,11 +67,11 @@ export async function PATCH(
   });
 
   if (!listing) {
-    return NextResponse.json({ error: 'Listing not found' }, { status: 404 });
+    return NextResponse.json({ error: 'Listing not found.' }, { status: 404 });
   }
 
   if (listing.userId !== userId) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    return NextResponse.json({ error: 'Forbidden.' }, { status: 403 });
   }
   if (listing.status === 'REMOVED') {
   return NextResponse.json(
