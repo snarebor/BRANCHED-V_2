@@ -4,8 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 
-console.log('=== UPLOADTHING ENV CHECK ===');
-console.log('has token:', Boolean(process.env.UPLOADTHING_TOKEN));
+
 const f = createUploadthing();
 
 
