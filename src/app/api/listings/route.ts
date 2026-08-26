@@ -5,6 +5,7 @@ import { Prisma } from '@prisma/client';
 
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { listingRateLimit } from '@/lib/rate-limit';
 
 const PAGE_SIZE = 20;
 const MAX_PAGE_SIZE = 50;
@@ -240,6 +241,23 @@ export async function POST(req: Request) {
       { status: 401 }
     );
   }
+  const rateLimitResult = await listingRateLimit.limit(`user:${user.id}`);
+
+if (!rateLimitResult.success) {
+  return NextResponse.json(
+    {
+      error: 'Too many listings created. Please try again later.',
+    },
+    {
+      status: 429,
+      headers: {
+        'Retry-After': String(
+          Math.ceil((rateLimitResult.reset - Date.now()) / 1000)
+        ),
+      },
+    }
+  );
+}
 
   const currentUser = await prisma.user.findUnique({
     where: {
