@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 20% 97%;
+    --foreground: 150 15% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 15% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 15% 10%;
+
+    --primary: 156 51% 24%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 150 25% 95%;
+    --secondary-foreground: 156 51% 20%;
+
+    --muted: 40 15% 93%;
+    --muted-foreground: 150 8% 40%;
+
+    --accent: 36 76% 60%;
+    --accent-foreground: 156 40% 12%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 156 51% 24%;
+
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  ::selection {
+    @apply bg-branch-200 text-branch-900;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Signature: a branching connector line used sparingly as a section motif */
+  .branch-line {
+    position: relative;
+  }
+  .branch-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 28px;
+    height: 1px;
+    background: hsl(var(--primary) / 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
