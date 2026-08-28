@@ -64,14 +64,12 @@ model User {
   conversations  ConversationParticipant[]
   favorites      Favorite[]
   listings       Listing[]                 @relation("UserListings")
-  notifications  Notification[]
   sentMessages   Message[]                 @relation("MessageSender")
+  moderationLogs ModerationLog[]
+  notifications  Notification[]
   reportsAgainst Report[]                  @relation("ReportsAgainstUser")
   reportsFiled   Report[]                  @relation("ReportsFiled")
   sessions       Session[]
-  moderationLogs ModerationLog[]
-
-  
 }
 
 model Category {
@@ -81,8 +79,6 @@ model Category {
   nameEn   String
   icon     String?
   listings Listing[]
-
-  
 }
 
 model Listing {
@@ -103,13 +99,13 @@ model Listing {
   expiresAt     DateTime?
   featured      Boolean                  @default(false)
   views         Int                      @default(0)
+  conversations Conversation[]
   favorites     Favorite[]
   category      Category                 @relation(fields: [categoryId], references: [id])
   user          User                     @relation("UserListings", fields: [userId], references: [id], onDelete: Cascade)
   messages      Message[]
   notifications Notification[]
   reports       Report[]
-  conversations Conversation[]
 
   @@index([categoryId])
   @@index([userId])
@@ -134,14 +130,15 @@ model Favorite {
 }
 
 model Conversation {
-  id           String                    @id @default(cuid())
-  listingId    String?
-  createdAt    DateTime                  @default(now())
-  updatedAt    DateTime                  @updatedAt
-  participants ConversationParticipant[]
-  messages     Message[]
+  id            String                    @id @default(cuid())
+  listingId     String?
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+  listing       Listing?                  @relation(fields: [listingId], references: [id])
+  participants  ConversationParticipant[]
+  messages      Message[]
   notifications Notification[]
-listing         Listing?                  @relation(fields: [listingId],references: [id],onDelete: SetNull)
+
   @@index([listingId])
 }
 
@@ -165,7 +162,7 @@ model Message {
   readAt         DateTime?
   createdAt      DateTime     @default(now())
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  listing        Listing?     @relation(fields: [listingId],references: [id],onDelete: SetNull)
+  listing        Listing?     @relation(fields: [listingId], references: [id])
   sender         User         @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
 
   @@index([conversationId, createdAt])
@@ -183,9 +180,9 @@ model Notification {
   conversationId String?
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
+  conversation   Conversation?    @relation(fields: [conversationId], references: [id])
+  listing        Listing?         @relation(fields: [listingId], references: [id])
   user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  listing        Listing?         @relation(fields: [listingId], references: [id], onDelete: SetNull)
-  conversation   Conversation?    @relation(fields: [conversationId], references: [id], onDelete: SetNull)
 
   @@index([userId, isRead, createdAt])
   @@index([listingId])
@@ -217,8 +214,7 @@ model ModerationLog {
   targetId    String
   action      String
   createdAt   DateTime @default(now())
-
-  moderator User @relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+  moderator   User     @relation(fields: [moderatorId], references: [id], onDelete: Cascade)
 
   @@index([moderatorId])
   @@index([targetType, targetId])
@@ -227,8 +223,8 @@ model ModerationLog {
 
 enum Role {
   USER
-  MODERATOR
   ADMIN
+  MODERATOR
 }
 
 enum ListingStatus {
@@ -261,4 +257,3 @@ enum ReportStatus {
   DISMISSED
   ACTIONED
 }
-

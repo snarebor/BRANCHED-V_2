@@ -18,8 +18,12 @@ import { NotificationBell } from '@/components/notifications/notification-bell';
 
 export function Navbar() {
   const { data: session, status } = useSession();
-  const user = session?.user as { id?: string; name?: string | null; image?: string | null } | undefined;
-
+  const user = session?.user as {
+  id?: string;
+  name?: string | null;
+  image?: string | null;
+  role?: string;
+} | undefined;
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="container flex h-16 items-center justify-between gap-4">
@@ -73,6 +77,13 @@ export function Navbar() {
       <UserIcon className="h-4 w-4" /> Dashboard
     </Link>
   </DropdownMenuItem>
+  {user.role === 'ADMIN' && (
+  <DropdownMenuItem asChild>
+    <Link href="/admin/reports">
+      Admin / Moderation
+    </Link>
+  </DropdownMenuItem>
+)}
 
 
   <DropdownMenuItem asChild>
