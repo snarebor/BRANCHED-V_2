@@ -144,3 +144,46 @@ export async function POST(req: Request) {
 
   return NextResponse.json({ favorite }, { status: 201 });
 }
+export async function DELETE(req: Request) {
+  const userId = await requireUserId();
+
+  if (!userId) {
+    return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(req.url);
+  const listingId = searchParams.get('listingId');
+
+  const parsed = favoriteSchema.safeParse({ listingId });
+
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: parsed.error.issues[0]?.message ?? 'Invalid input.' },
+      { status: 400 }
+    );
+  }
+
+  const existingFavorite = await prisma.favorite.findUnique({
+    where: {
+      userId_listingId: {
+        userId,
+        listingId: parsed.data.listingId,
+      },
+    },
+  });
+
+  if (!existingFavorite) {
+    return NextResponse.json(
+      { error: 'Favorite not found.' },
+      { status: 404 }
+    );
+  }
+
+  await prisma.favorite.delete({
+    where: {
+      id: existingFavorite.id,
+    },
+  });
+
+  return NextResponse.json({ success: true });
+}
