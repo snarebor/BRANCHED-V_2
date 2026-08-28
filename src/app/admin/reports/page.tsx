@@ -112,66 +112,77 @@ export default async function AdminReportsPage() {
               )}
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                {report.listing && (
-                  <Link
-                    href={`/listings/${report.listing.id}`}
-                    className="rounded-xl border border-border p-4 transition-colors hover:bg-muted"
-                  >
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                      Listing
-                    </p>
+             {report.listing && (
+  <div className="rounded-xl border border-border p-4">
+    <Link
+      href={`/listings/${report.listing.id}`}
+      className="block transition-colors hover:bg-muted"
+    >
+      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        Listing
+      </p>
 
-                    <p className="mt-1 font-medium">
-                      {report.listing.title}
-                    </p>
+      <p className="mt-1 font-medium">
+        {report.listing.title}
+      </p>
 
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Status: {report.listing.status}
-                    </p>
+      <p className="mt-1 text-xs text-muted-foreground">
+        Status: {report.listing.status}
+      </p>
 
-                    {report.listing.isFlagged && (
-                      <p className="mt-2 text-xs font-medium text-destructive">
-                        Flagged
-                      </p>
-                    )}
-                    <ModerationActions
-  target="listing"
-  id={report.listing.id}
-  isFlagged={report.listing.isFlagged}
-  status={report.listing.status}
-/>
-                  </Link>
-                  
-                )}
+      {report.listing.isFlagged && (
+        <p className="mt-2 text-xs font-medium text-destructive">
+          Flagged
+        </p>
+      )}
+    </Link>
+
+    <ModerationActions
+      target="listing"
+      id={report.listing.id}
+      isFlagged={report.listing.isFlagged}
+      status={report.listing.status}
+    />
+  </div>
+)}
 
                 {report.reportedUser && (
-                  <Link
-                    href={`/profile/${report.reportedUser.id}`}
-                    className="rounded-xl border border-border p-4 transition-colors hover:bg-muted"
-                  >
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                      User
-                    </p>
+  <div className="rounded-xl border border-border p-4">
+    <Link
+      href={`/profile/${report.reportedUser.id}`}
+      className="block transition-colors hover:bg-muted"
+    >
+      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        User
+      </p>
 
-                    <p className="mt-1 font-medium">
-                      {report.reportedUser.name ?? 'Unknown user'}
-                    </p>
+      <p className="mt-1 font-medium">
+        {report.reportedUser.name ?? 'Unknown user'}
+      </p>
 
-                    <div className="mt-2 flex gap-2 text-xs">
-                      {report.reportedUser.isFlagged && (
-                        <span className="font-medium text-destructive">
-                          Flagged
-                        </span>
-                      )}
+      <div className="mt-2 flex gap-2 text-xs">
+        {report.reportedUser.isFlagged && (
+          <span className="font-medium text-destructive">
+            Flagged
+          </span>
+        )}
 
-                      {report.reportedUser.isBanned && (
-                        <span className="font-medium text-destructive">
-                          Banned
-                        </span>
-                      )}
-                    </div>
-                  </Link>
-                )}
+        {report.reportedUser.isBanned && (
+          <span className="font-medium text-destructive">
+            Banned
+          </span>
+        )}
+      </div>
+    </Link>
+
+    <ModerationActions
+      target="user"
+      id={report.reportedUser.id}
+      isFlagged={report.reportedUser.isFlagged}
+      isBanned={report.reportedUser.isBanned}
+    />
+  </div>
+)}
               </div>
             </div>
           ))}
