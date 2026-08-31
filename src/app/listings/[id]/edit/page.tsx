@@ -109,13 +109,15 @@ export default async function EditListingPage({
           categories={categories}
           listingId={listing.id}
           initialValues={{
-            title: listing.title,
-            description: listing.description,
-            price: listing.price ? String(listing.price) : '',
-            location: listing.location,
-            images: listing.images,
-            categorySlug: listing.category.slug,
-          }}
+  title: listing.title,
+  description: listing.description,
+  price: listing.price ? String(listing.price) : '',
+  location: listing.location,
+  images: listing.images,
+  categorySlug: listing.category.slug,
+  characteristics:
+    (listing.characteristics as Record<string, string> | null) ?? {},
+}}
         />
       </div>
     </div>

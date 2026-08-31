@@ -62,7 +62,12 @@ const createListingSchema = z
   .max(8)
   .default([]),
 
-    categorySlug: z
+characteristics: z
+  .record(z.string(), z.string().trim().max(500))
+  .optional()
+  .default({}),
+
+categorySlug: z
       .string()
       .trim()
       .min(1, 'Category is required.')

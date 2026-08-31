@@ -82,30 +82,31 @@ model Category {
 }
 
 model Listing {
-  id            String                   @id @default(cuid())
-  title         String
-  description   String
-  price         Decimal?                 @db.Decimal(12, 2)
-  currency      String                   @default("RUB")
-  location      String
-  images        String[]                 @default([])
-  status        ListingStatus            @default(ACTIVE)
-  isFlagged     Boolean                  @default(false)
-  categoryId    String
-  userId        String
-  createdAt     DateTime                 @default(now())
-  updatedAt     DateTime                 @updatedAt
-  searchVector  Unsupported("tsvector")?
-  expiresAt     DateTime?
-  featured      Boolean                  @default(false)
-  views         Int                      @default(0)
-  conversations Conversation[]
-  favorites     Favorite[]
-  category      Category                 @relation(fields: [categoryId], references: [id])
-  user          User                     @relation("UserListings", fields: [userId], references: [id], onDelete: Cascade)
-  messages      Message[]
-  notifications Notification[]
-  reports       Report[]
+  id              String                   @id @default(cuid())
+  title           String
+  description     String
+  price           Decimal?                 @db.Decimal(12, 2)
+  currency        String                   @default("RUB")
+  location        String
+  images          String[]                 @default([])
+  characteristics Json?
+  status          ListingStatus            @default(ACTIVE)
+  isFlagged       Boolean                  @default(false)
+  categoryId      String
+  userId          String
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
+  searchVector    Unsupported("tsvector")?
+  expiresAt       DateTime?
+  featured        Boolean                  @default(false)
+  views           Int                      @default(0)
+  conversations   Conversation[]
+  favorites       Favorite[]
+  category        Category                 @relation(fields: [categoryId], references: [id])
+  user            User                     @relation("UserListings", fields: [userId], references: [id], onDelete: Cascade)
+  messages        Message[]
+  notifications   Notification[]
+  reports         Report[]
 
   @@index([categoryId])
   @@index([userId])
