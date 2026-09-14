@@ -5,7 +5,10 @@ import { NotificationType } from '@prisma/client';
 
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { messageRateLimit } from '@/lib/rate-limit';
+import {
+  messageRateLimit,
+  recipientMessageRateLimit,
+} from '@/lib/rate-limit';
 
 const CONVERSATION_PAGE_SIZE = 20;
 const MAX_PAGE_SIZE = 50;
@@ -251,6 +254,32 @@ if (!rateLimit.success) {
       { status: 400 }
     );
   }
+  const recipientRateLimit = await recipientMessageRateLimit.limit(
+  `${userId}:${recipientId}`
+);
+
+if (!recipientRateLimit.success) {
+  return NextResponse.json(
+    {
+      error:
+        'You are sending messages to this user too quickly. Please wait a moment.',
+    },
+    {
+      status: 429,
+      headers: {
+        'X-RateLimit-Limit': recipientRateLimit.limit.toString(),
+        'X-RateLimit-Remaining':
+          recipientRateLimit.remaining.toString(),
+        'Retry-After': Math.max(
+          1,
+          Math.ceil(
+            (recipientRateLimit.reset - Date.now()) / 1000
+          )
+        ).toString(),
+      },
+    }
+  );
+}
 
   const recipient = await prisma.user.findUnique({
     where: { id: recipientId },
@@ -348,6 +377,29 @@ if (!rateLimit.success) {
         },
       },
     }));
+    const duplicateMessage = await prisma.message.findFirst({
+  where: {
+    conversationId: conversation.id,
+    senderId: userId,
+    body: messageBody,
+    createdAt: {
+      gte: new Date(Date.now() - 60 * 1000),
+    },
+  },
+  select: {
+    id: true,
+  },
+});
+
+if (duplicateMessage) {
+  return NextResponse.json(
+    {
+      error:
+        'You recently sent this message. Please avoid sending duplicate messages.',
+    },
+    { status: 409 }
+  );
+}
 
   const message = await prisma.message.create({
     data: {

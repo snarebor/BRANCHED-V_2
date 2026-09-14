@@ -16,6 +16,12 @@ export const messageRateLimit = new Ratelimit({
   analytics: true,
   prefix: 'ratelimit:messages',
 });
+export const recipientMessageRateLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(6, '1 m'),
+  analytics: true,
+  prefix: 'ratelimit:messages:recipient',
+});
 
 export const listingRateLimit = new Ratelimit({
   redis,
