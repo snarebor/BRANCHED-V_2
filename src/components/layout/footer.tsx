@@ -25,8 +25,12 @@ export function Footer() {
   </Link>
 
   <Link href="/privacy" className="hover:text-foreground">
-    Privacy
-  </Link>
+  Privacy
+</Link>
+
+<Link href="/terms" className="hover:text-foreground">
+  Terms
+</Link>
 </div>
       </div>
       <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
