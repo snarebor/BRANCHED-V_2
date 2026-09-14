@@ -5,6 +5,7 @@ import { Providers } from '@/components/providers';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
+import { CookieConsent } from '@/components/cookie-consent';
 
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
@@ -35,13 +36,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} ${notoSans.variable}`}>
       <body className="flex min-h-screen flex-col">
-        <Providers>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </Providers>
-         <Toaster />
-      </body>
+  <Providers>
+    <Navbar />
+    <main className="flex-1">{children}</main>
+    <Footer />
+  </Providers>
+
+  <CookieConsent />
+  <Toaster />
+</body>
     </html>
   );
 }
