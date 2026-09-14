@@ -12,10 +12,22 @@ export function Footer() {
           </p>
         </div>
         <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground">
-          <Link href="/browse" className="hover:text-foreground">Browse listings</Link>
-          <Link href="/listings/new" className="hover:text-foreground">Post a listing</Link>
-          <Link href="/register" className="hover:text-foreground">Create account</Link>
-        </div>
+  <Link href="/browse" className="hover:text-foreground">
+    Browse listings
+  </Link>
+
+  <Link href="/listings/new" className="hover:text-foreground">
+    Post a listing
+  </Link>
+
+  <Link href="/register" className="hover:text-foreground">
+    Create account
+  </Link>
+
+  <Link href="/privacy" className="hover:text-foreground">
+    Privacy
+  </Link>
+</div>
       </div>
       <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} Branched. Built for a safer classifieds experience.
