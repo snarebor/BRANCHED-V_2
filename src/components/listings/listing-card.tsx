@@ -52,7 +52,7 @@ export function ListingCard({
 
 
 
-          <div className="absolute left-3 top-3 flex flex-col gap-2">
+          <div className="absolute left-2 top-2 flex max-w-[65%] flex-col gap-1 sm:left-3 sm:top-3 sm:gap-2">
 
             {listing.featured && (
   <Badge
@@ -65,7 +65,7 @@ export function ListingCard({
 
             <Badge
               variant="secondary"
-              className="bg-card/90"
+              className="max-w-full truncate bg-card/90 text-[10px] sm:text-xs"
             >
               {listing.category.nameEn}
             </Badge>
@@ -79,7 +79,7 @@ export function ListingCard({
 
 
 
-      <div className="absolute right-3 top-3">
+      <div className="absolute right-2 top-2 sm:right-3 sm:top-3">
 
         <FavoriteButton
           listingId={listing.id}
@@ -95,17 +95,17 @@ export function ListingCard({
 
       <Link
         href={`/listings/${listing.id}`}
-        className="flex flex-1 flex-col gap-2 p-4"
+        className="flex flex-1 flex-col gap-2 p-3 sm:p-4"
       >
 
 
-        <h3 className="line-clamp-2 font-display text-base font-semibold leading-snug">
+        <h3 className="line-clamp-2 font-display text-sm font-semibold leading-snug sm:text-base">
           {listing.title}
         </h3>
 
 
 
-        <p className="font-mono text-base font-semibold text-branch-600">
+        <p className="break-words font-mono text-sm font-semibold text-branch-600 sm:text-base">
           {formatPrice(
             listing.price,
             listing.currency
@@ -118,13 +118,10 @@ export function ListingCard({
         <div className="mt-auto flex flex-col gap-1 pt-2 text-xs text-muted-foreground">
 
 
-          <span className="flex items-center gap-1">
-
-            <MapPin className="h-3 w-3"/>
-
-            {listing.location}
-
-          </span>
+          <span className="flex min-w-0 items-center gap-1">
+  <MapPin className="h-3 w-3 shrink-0" />
+  <span className="truncate">{listing.location}</span>
+</span>
 
 
 

@@ -590,7 +590,7 @@ export default async function BrowsePage({
 
   return (
 
-    <div className="container py-8">
+    <div className="container px-4 py-6 sm:py-8">
 
 
 
@@ -601,7 +601,7 @@ export default async function BrowsePage({
         <div>
 
 
-          <h1 className="font-display text-3xl font-semibold text-branch-900">
+          <h1 className="font-display text-2xl font-semibold text-branch-900 sm:text-3xl">
 
 
             {searchParams.q
@@ -644,10 +644,10 @@ export default async function BrowsePage({
 
 
 
-          <div className="flex shrink-0 items-center gap-2 text-sm">
+          <div className="flex w-full items-center gap-2 overflow-x-auto pb-1 text-sm sm:w-auto">
 
 
-            <span className="text-muted-foreground">
+            <span className="shrink-0 text-muted-foreground">
 
               Sort:
 
@@ -690,7 +690,7 @@ params.delete('page');
 
                   className={cn(
 
-                    'rounded-full px-3 py-1.5 font-medium',
+                    'shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 font-medium',
 
                     active
 
