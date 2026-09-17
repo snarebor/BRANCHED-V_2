@@ -26,29 +26,30 @@ export function Navbar() {
 } | undefined;
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
-      <div className="container flex h-16 items-center justify-between gap-4">
-        <Link href="/">
-          <Logo />
-        </Link>
+      <div className="container flex h-16 items-center justify-between gap-2 px-4 sm:gap-4">
+        <Link href="/" className="shrink-0">
+  <Logo />
+</Link>
 
         <nav className="hidden items-center gap-1 md:flex">
           <Button variant="ghost" size="sm" asChild>
             <Link href="/browse">Browse</Link>
           </Button>
           {user && (
-            <>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/favorites">Favorites</Link>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/messages">Messages</Link>
-              </Button>
-              <NotificationBell />
-            </>
-          )}
+  <>
+    <Button variant="ghost" size="sm" asChild>
+      <Link href="/favorites">Favorites</Link>
+    </Button>
+
+    <Button variant="ghost" size="sm" asChild>
+      <Link href="/messages">Messages</Link>
+    </Button>
+  </>
+)}
         </nav>
 
         <div className="flex items-center gap-2">
+          {user && <NotificationBell />}
           {user && (
             <Button asChild className="hidden sm:inline-flex">
               <Link href="/listings/new">
@@ -71,6 +72,25 @@ export function Navbar() {
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
+  <DropdownMenuItem asChild className="md:hidden">
+  <Link href="/browse">
+    Browse
+  </Link>
+</DropdownMenuItem>
+
+<DropdownMenuItem asChild className="md:hidden">
+  <Link href="/favorites">
+    Favorites
+  </Link>
+</DropdownMenuItem>
+
+<DropdownMenuItem asChild className="md:hidden">
+  <Link href="/messages">
+    Messages
+  </Link>
+</DropdownMenuItem>
+
+<DropdownMenuSeparator className="md:hidden" />
 
   <DropdownMenuItem asChild>
     <Link href="/dashboard">
@@ -113,10 +133,10 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/login">Log in</Link>
-              </Button>
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Button variant="ghost" size="sm" asChild className="px-2 sm:px-3">
+  <Link href="/login">Log in</Link>
+</Button>
               <Button size="sm" asChild>
                 <Link href="/register">Sign up</Link>
               </Button>
