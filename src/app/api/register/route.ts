@@ -26,9 +26,10 @@ if (!rateLimitResult.success) {
     {
       status: 429,
       headers: {
-        'Retry-After': String(
-          Math.ceil((rateLimitResult.reset - Date.now()) / 1000)
-        ),
+        'Retry-After': Math.max(
+  1,
+  Math.ceil((rateLimitResult.reset - Date.now()) / 1000)
+).toString(),
       },
     }
   );
