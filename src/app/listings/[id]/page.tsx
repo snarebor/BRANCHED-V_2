@@ -228,17 +228,17 @@ export default async function ListingDetailPage({
     );
 
   return (
-    <div className="container max-w-5xl py-8">
+    <div className="container max-w-5xl px-4 py-5 sm:py-8">
       {/* Breadcrumbs */}
-      <div className="mb-6 flex items-center gap-1 text-sm text-muted-foreground">
+      <div className="mb-4 flex min-w-0 items-center gap-1 overflow-hidden text-sm text-muted-foreground sm:mb-6">
         <Link
           href="/browse"
-          className="transition hover:text-foreground"
+          className="shrink-0transition hover:text-foreground"
         >
           Browse
         </Link>
 
-        <ChevronRight className="h-4 w-4" />
+        <ChevronRight className="h-4 w-4 shrink-0"/>
 
         <Link
           href={`/browse?category=${listing.category.slug}`}
@@ -285,7 +285,7 @@ export default async function ListingDetailPage({
           </div>
 
           {/* Price */}
-          <p className="font-mono text-3xl font-semibold tracking-tight text-branch-600">
+         <p className="break-words font-mono text-2xl font-semibold tracking-tight text-branch-600 sm:text-3xl">
             {formatPrice(
               listing.price as unknown as
                 number | null,
@@ -293,16 +293,16 @@ export default async function ListingDetailPage({
           </p>
 
           {/* Title */}
-          <h1 className="mt-2 max-w-3xl font-display text-3xl font-semibold tracking-tight text-branch-900 sm:text-4xl">
+          <h1 className="mt-2 max-w-3xl break-words font-display text-2xl font-semibold tracking-tight text-branch-900 sm:text-4xl">
             {listing.title}
           </h1>
 
           {/* Location + date */}
           <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="h-4 w-4" />
-              {listing.location}
-            </span>
+            <span className="flex min-w-0 items-center gap-1.5">
+  <MapPin className="h-4 w-4 shrink-0" />
+  <span className="break-words">{listing.location}</span>
+</span>
 
             <span className="flex items-center gap-1.5">
               <Calendar className="h-4 w-4" />
@@ -418,7 +418,7 @@ export default async function ListingDetailPage({
               Description
             </h2>
 
-            <div className="prose prose-sm mt-4 max-w-none whitespace-pre-wrap text-foreground">
+            <div className="prose prose-sm mt-4 max-w-none break-words whitespace-pre-wrap text-foreground">
               {listing.description}
             </div>
           </section>
@@ -504,7 +504,7 @@ export default async function ListingDetailPage({
           </div>
 
           {!isOwner && (
-            <div className="mt-5 flex items-center justify-between border-t border-border pt-5">
+            <div className="mt-5 flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-muted-foreground">
                 View the seller's profile and
                 other active listings.

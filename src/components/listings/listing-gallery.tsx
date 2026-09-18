@@ -47,17 +47,17 @@ export function ListingGallery({
 
   return (
     <>
-      <div className="grid grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-2xl">
+      <div className="grid grid-cols-4 gap-2 overflow-hidden rounded-2xl sm:grid-rows-2">
         {visibleImages.map((src, index) => (
           <button
             key={src + index}
             type="button"
             onClick={() => setSelectedIndex(index)}
             className={`relative overflow-hidden bg-muted ${
-              index === 0
-                ? 'col-span-4 row-span-2 aspect-[16/10] sm:col-span-2 sm:row-span-2'
-                : 'col-span-2 aspect-square sm:col-span-1'
-            }`}
+  index === 0
+    ? 'col-span-4 aspect-[16/10] sm:col-span-2 sm:row-span-2 sm:aspect-auto'
+    : 'col-span-1 aspect-square sm:col-span-1'
+}`}
           >
             <Image
               src={src}
@@ -65,6 +65,11 @@ export function ListingGallery({
               fill
               className="object-cover transition-transform duration-300 hover:scale-105"
               priority={index === 0}
+              sizes={
+  index === 0
+    ? '(max-width: 640px) 100vw, 50vw'
+    : '(max-width: 640px) 25vw, 25vw'
+}
             />
           </button>
         ))}
@@ -90,14 +95,14 @@ export function ListingGallery({
               event.stopPropagation();
               previousImage();
             }}
-            className="absolute left-4 rounded-full bg-white/10 p-3 text-white hover:bg-white/20"
+           className="absolute left-2 z-10 rounded-full bg-black/50 p-2 text-white hover:bg-black/70 sm:left-4 sm:p-3"
             aria-label="Previous image"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
 
           <div
-            className="relative h-[80vh] w-full max-w-5xl"
+            className="relative h-[75dvh] w-full max-w-5xl sm:h-[80vh]"
             onClick={(event) => event.stopPropagation()}
           >
             <Image
@@ -115,7 +120,7 @@ export function ListingGallery({
               event.stopPropagation();
               nextImage();
             }}
-            className="absolute right-4 rounded-full bg-white/10 p-3 text-white hover:bg-white/20"
+            className="absolute right-2 z-10 rounded-full bg-black/50 p-2 text-white hover:bg-black/70 sm:right-4 sm:p-3"
             aria-label="Next image"
           >
             <ChevronRight className="h-6 w-6" />
