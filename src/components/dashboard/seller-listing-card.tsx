@@ -40,7 +40,7 @@ export function SellerListingCard({
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-4 sm:flex-row">
 
-      <div className="relative h-32 w-full overflow-hidden rounded-xl bg-muted sm:w-40">
+      <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden rounded-xl bg-muted sm:h-32 sm:w-40 sm:aspect-auto">
 
         {cover ? (
 
@@ -49,6 +49,7 @@ export function SellerListingCard({
             alt={listing.title}
             fill
             className="object-cover"
+            sizes="(max-width: 640px) 100vw, 160px"
           />
 
         ) : (
@@ -63,7 +64,8 @@ export function SellerListingCard({
 
 
 
-      <div className="flex flex-1 flex-col justify-between">
+      <div className="flex min-w-0 flex-1 flex-col justify-between">
+        <div className="min-w-0"></div>
 
 
         <div>
@@ -74,7 +76,7 @@ export function SellerListingCard({
 
               <Link
                 href={`/listings/${listing.id}`}
-                className="font-semibold hover:text-branch-600"
+                className="break-words font-semibold hover:text-branch-600"
               >
                 {listing.title}
               </Link>
@@ -87,7 +89,7 @@ export function SellerListingCard({
             </div>
 
 
-            <Badge>
+            <Badge className="shrink-0">
               {listing.status}
             </Badge>
 
@@ -95,7 +97,7 @@ export function SellerListingCard({
 
 
 
-          <p className="mt-3 font-mono font-semibold text-branch-600">
+          <p className="mt-3 break-words font-mono font-semibold text-branch-600">
 
             {formatPrice(
               listing.price,
@@ -126,7 +128,7 @@ export function SellerListingCard({
 
 
 
-   <div className="mt-4 flex flex-wrap items-center gap-2">
+   <div className="mt-4 flex w-full flex-wrap items-center gap-2">
 
   <Button
     asChild

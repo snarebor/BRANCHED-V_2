@@ -19,8 +19,8 @@ export default async function MyListingsPage() {
 
   if (!userId) {
     return (
-      <div className="container max-w-4xl py-10">
-        <div className="rounded-2xl border border-border bg-card p-8 text-center">
+      <div className="container max-w-4xl px-4 py-6 sm:py-10">
+        <div className="rounded-2xl border border-border bg-card p-5 sm:p-8 text-center">
           <h1 className="font-display text-xl font-semibold text-branch-900">
             Sign in to view your listings
           </h1>
@@ -46,8 +46,8 @@ export default async function MyListingsPage() {
 
   if (!user) {
     return (
-      <div className="container max-w-4xl py-10">
-        <div className="rounded-2xl border border-border bg-card p-8 text-center">
+      <div className= "container max-w-5xl px-4 py-6 sm:py-10">
+        <div className="rounded-2xl border border-border bg-card p-5 sm:p-8 text-center">
           <h1 className="font-display text-xl font-semibold text-branch-900">
             Account unavailable
           </h1>
@@ -117,7 +117,7 @@ export default async function MyListingsPage() {
       </div>
 
       {user.isBanned ? (
-        <div className="mt-8 rounded-2xl border border-border bg-card p-8 text-center">
+        <div className="mt-8 rounded-2xl border border-border bg-card p-5 sm:p-8 text-center">
           <h2 className="font-display text-xl font-semibold text-branch-900">
             Account restricted
           </h2>
@@ -137,7 +137,7 @@ export default async function MyListingsPage() {
             Post your first listing to start selling on BRANCHED.
           </p>
 
-          <Button asChild className="mt-6">
+          <Button asChild className="w-full sm:w-auto">
             <Link href="/listings/new">
               <Plus className="h-4 w-4" />
               Post your first listing
@@ -228,7 +228,7 @@ function ListingSection({
               <div className="min-w-0">
                 <Link
                   href={`/listings/${listing.id}`}
-                  className="font-medium text-branch-900 hover:underline"
+                  className="break-words font-medium text-branch-900 hover:underline"
                 >
                   {listing.title}
                 </Link>
@@ -247,7 +247,7 @@ function ListingSection({
               </div>
 
               {!isBanned && listing.status !== 'REMOVED' && (
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
                   <Button
                     asChild
                     variant="outline"

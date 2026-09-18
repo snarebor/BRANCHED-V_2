@@ -223,14 +223,14 @@ const [
 
   return (
 
-    <div className="container py-10">
+    <div className="container px-4 py-6 sm:py-10">
 
 
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
 
-        <h1 className="font-display text-3xl font-semibold text-branch-900">
-          Welcome, {user.name}
-        </h1>
+        <h1 className="break-words font-display text-2xl font-semibold text-branch-900 sm:text-3xl">
+  Welcome, {user.name}
+</h1>
 
 
         <p className="mt-2 text-muted-foreground">
@@ -243,7 +243,7 @@ const [
 
 
 
-      <div className="mb-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
 
   <DashboardStatCard
     title="Active"
@@ -284,10 +284,10 @@ const [
 </div>
 <section className="mb-10">
 
-  <div className="mb-4 flex items-center justify-between">
+  <div className="mb-4 flex items-start justify-between gap-4">
 
     <div>
-      <h2 className="font-display text-2xl font-semibold text-branch-900">
+      <h2 className="font-display text-xl font-semibold text-branch-900 sm:text-2xl">
         Recent inquiries
       </h2>
 
@@ -298,7 +298,7 @@ const [
 
     <Link
       href="/messages"
-      className="text-sm font-medium text-branch-600 hover:text-branch-700"
+      className="shrink-0 whitespace-nowrap text-sm font-medium text-branch-600 hover:text-branch-700"
     >
       View all
     </Link>
@@ -308,7 +308,7 @@ const [
 
   {recentConversations.length === 0 ? (
 
-    <div className="rounded-2xl border border-dashed border-border bg-card p-8 text-center">
+    <div className="rounded-2xl border border-dashed border-border bg-card p-5 text-center sm:p-8">
 
       <MessageCircle className="mx-auto h-8 w-8 text-branch-500" />
 
@@ -384,12 +384,12 @@ const [
 
 
 
-      <div className="mb-10 grid gap-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
 
 
         <Link
           href="/listings/new"
-          className="rounded-2xl border border-border bg-card p-5 transition hover:bg-muted"
+          className="min-w-0 rounded-2xl border border-border bg-card p-4 transition hover:bg-muted sm:p-5"
         >
 
           <Plus className="h-5 w-5 text-branch-500" />
@@ -410,7 +410,7 @@ const [
 
         <Link
           href="/favorites"
-          className="rounded-2xl border border-border bg-card p-5 transition hover:bg-muted"
+          className="min-w-0 rounded-2xl border border-border bg-card p-4 transition hover:bg-muted sm:p-5"
         >
 
           <Heart className="h-5 w-5 text-branch-500" />
@@ -479,7 +479,7 @@ const [
       
       <section>
 
-  <h2 className="mb-4 font-display text-2xl font-semibold text-branch-900">
+ <h2 className="mb-4 font-display text-xl font-semibold text-branch-900 sm:text-2xl">
     Your listings
   </h2>
 
@@ -523,7 +523,7 @@ Edit, delete and track your posts.
 
   ) : (
 
-  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  <div className="grid gap-4 lg:grid-cols-2">
 
 {
  listings.map((listing)=>(

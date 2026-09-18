@@ -107,12 +107,12 @@ export default async function FavoritesPage() {
 
   return (
 
-    <div className="container py-10">
+    <div className="container px-4 py-6 sm:py-10">
 
 
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
 
-        <h1 className="font-display text-3xl font-semibold text-branch-900">
+        <h1 className="font-display text-2xl font-semibold text-branch-900 sm:text-3xl">
           Saved listings
         </h1>
 
