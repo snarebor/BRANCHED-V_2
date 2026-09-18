@@ -56,8 +56,8 @@ export default async function EditListingPage({
 
   if (user.isBanned) {
     return (
-      <div className="container max-w-2xl py-10">
-        <div className="rounded-2xl border border-border bg-card p-8 text-center">
+      <div className="container max-w-2xl px-4 py-6 sm:py-10">
+        <div className="rounded-2xl border border-border bg-card p-5 text-center sm:p-8">
           <h1 className="font-display text-2xl font-semibold text-branch-900">
             Account restricted
           </h1>
@@ -104,7 +104,7 @@ export default async function EditListingPage({
         Update details, photos, or mark this as sold.
       </p>
 
-      <div className="mt-8">
+      <div className="mt-6 sm:mt-8">
         <ListingForm
           categories={categories}
           listingId={listing.id}

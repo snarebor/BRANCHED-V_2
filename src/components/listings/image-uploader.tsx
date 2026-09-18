@@ -74,7 +74,7 @@ export function ImageUploader({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3">
         {images.map((src, i) => (
           <div
             key={`${src}-${i}`}
@@ -85,15 +85,16 @@ export function ImageUploader({
               alt={`Listing image ${i + 1}`}
               fill
               className="object-cover"
+              sizes="(max-width: 640px) 33vw, 25vw"
             />
 
             <button
               type="button"
               onClick={() => removeAt(i)}
-              className="absolute right-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity group-hover:opacity-100"
+              className="absolute right-1.5 top-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-white opacity-100 transition-opacity sm:h-6 sm:w-6 sm:opacity-0 sm:group-hover:opacity-100"
               aria-label={`Remove image ${i + 1}`}
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
             </button>
 
             {i === 0 && (
@@ -137,7 +138,7 @@ export function ImageUploader({
       </p>
 
       {error && (
-        <p className="text-sm text-destructive" role="alert">
+        <p className="break-words text-sm text-destructive" role="alert">
           {error}
         </p>
       )}

@@ -454,7 +454,7 @@ export function ListingForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col gap-6"
+      className="flex min-w-0 flex-col gap-6"
     >
       <div className="flex flex-col gap-2">
         <Label htmlFor="title">
@@ -474,7 +474,7 @@ export function ListingForm({
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label htmlFor="category">
             Category
@@ -486,7 +486,7 @@ export function ListingForm({
               update('categorySlug', value)
             }
           >
-            <SelectTrigger id="category">
+            <SelectTrigger id="category" className="w-full min-w-0">
               <SelectValue placeholder="Choose a category" />
             </SelectTrigger>
 
@@ -539,7 +539,7 @@ export function ListingForm({
       </div>
 
       {characteristicFields.length > 0 && (
-        <div className="rounded-2xl border border-border bg-card p-5">
+        <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
           <div className="mb-4">
             <h2 className="font-display text-base font-semibold text-branch-900">
               Details
@@ -574,8 +574,9 @@ export function ListingForm({
                     }
                   >
                     <SelectTrigger
-                      id={`characteristic-${field.key}`}
-                    >
+  id={`characteristic-${field.key}`}
+  className="w-full min-w-0"
+>
                       <SelectValue
                         placeholder={`Select ${field.label.toLowerCase()}`}
                       />
@@ -653,7 +654,7 @@ export function ListingForm({
       </div>
 
       {error && (
-        <p className="text-sm text-destructive">
+        <p className="break-words text-sm text-destructive">
           {error}
         </p>
       )}
@@ -662,7 +663,7 @@ export function ListingForm({
         type="submit"
         size="lg"
         disabled={submitting}
-        className="self-start"
+        className="w-full sm:w-auto sm:self-start"
       >
         {submitting
           ? 'Saving...'
