@@ -63,7 +63,7 @@ export function ConversationList({
                 unread && !active && 'bg-branch-50/60 hover:bg-branch-50'
               )}
             >
-              <Avatar>
+              <Avatar className="shrink-0">
                 <AvatarImage
                   src={other?.image ?? undefined}
                   alt={other?.name ?? 'User'}
@@ -87,7 +87,7 @@ export function ConversationList({
 
                     {unread && (
                       <span
-                        className="rounded-full bg-branch-500 px-2 py-0.5 text-[10px] font-semibold text-white"
+                        className="shrink-0 rounded-full bg-branch-500 px-2 py-0.5 text-[10px] font-semibold text-white"
                         aria-label={`${conversation.unreadCount} unread messages`}
                       >
                         {conversation.unreadCount}

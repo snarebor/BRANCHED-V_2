@@ -158,8 +158,8 @@ export default async function ConversationPage({
   const conversations = await getConversations(userId);
 
   return (
-    <div className="container max-w-4xl py-8">
-      <h1 className="mb-6 font-display text-2xl font-semibold text-branch-900">
+    <div className="container max-w-4xl px-4 py-4 sm:py-8">
+      <h1 className="mb-4 font-display text-2xl font-semibold text-branch-900 sm:mb-6">
         Messages
       </h1>
 
@@ -181,7 +181,7 @@ export default async function ConversationPage({
 
           <div className="border-b border-border px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
-              <Avatar>
+              <Avatar className="shrink-0">
                 <AvatarImage
                   src={otherParticipant?.image ?? undefined}
                   alt={otherParticipant?.name ?? 'User'}
@@ -211,9 +211,9 @@ export default async function ConversationPage({
                 href={`/listings/${conversation.listing.id}`}
                 className="block rounded-xl bg-muted p-3 transition hover:bg-muted/70"
               >
-                <p className="text-sm font-semibold">
-                  {conversation.listing.title}
-                </p>
+                <p className="break-words text-sm font-semibold">
+  {conversation.listing.title}
+</p>
 
                 <p className="mt-1 text-xs text-muted-foreground">
                   View listing details

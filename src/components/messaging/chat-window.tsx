@@ -249,7 +249,7 @@ export function ChatWindow({
 
   return (
 
-    <div className="flex h-[70vh] flex-col rounded-2xl border border-border bg-card">
+    <div className="flex h-[65dvh] min-h-[420px] min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card sm:h-[70vh]">
 
 
       <div className="flex items-center gap-3 border-b border-border p-4">
@@ -289,16 +289,11 @@ export function ChatWindow({
 
 
               <Link
-
-                href={`/listings/${conversation.listing.id}`}
-
-                className="truncate text-xs text-branch-600 hover:underline"
-
-              >
-
-                {conversation.listing.title}
-
-              </Link>
+  href={`/listings/${conversation.listing.id}`}
+  className="block truncate text-xs text-branch-600 hover:underline"
+>
+  {conversation.listing.title}
+</Link>
 
 
             </div>
@@ -324,7 +319,7 @@ export function ChatWindow({
 
 
 
-      <div className="flex-1 space-y-3 overflow-y-auto p-4">
+      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-3 sm:p-4">
 
 
         {messages.length === 0 && (
@@ -367,7 +362,7 @@ export function ChatWindow({
               <div
 
                 className={cn(
-                  'max-w-[75%] rounded-2xl px-4 py-2 text-sm',
+                  'max-w-[85%] rounded-2xl px-3 py-2 text-sm sm:max-w-[75%] sm:px-4',
                   mine
                     ? 'bg-branch-500 text-white'
                     : 'bg-muted text-foreground'
@@ -428,7 +423,7 @@ export function ChatWindow({
 
         onSubmit={send}
 
-        className="flex gap-3 border-t border-border p-4"
+        className="flex min-w-0 items-end gap-2 border-t border-border p-3 sm:gap-3 sm:p-4"
 
       >
 
@@ -465,6 +460,7 @@ export function ChatWindow({
 
           className="
             min-h-[44px]
+            min-w-0
             flex-1
             resize-none
             rounded-xl
@@ -494,17 +490,19 @@ export function ChatWindow({
           }
 
 
-          className="
-            rounded-xl
-            bg-branch-600
-            px-5
-            py-3
-            text-sm
-            font-medium
-            text-white
-            disabled:cursor-not-allowed
-            disabled:opacity-50
-          "
+         className="
+  shrink-0
+  rounded-xl
+  bg-branch-600
+  px-3
+  py-3
+  text-sm
+  font-medium
+  text-white
+  disabled:cursor-not-allowed
+  disabled:opacity-50
+  sm:px-5
+"
 
         >
 

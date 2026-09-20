@@ -139,10 +139,9 @@ export default async function MessagesPage() {
 
   return (
 
-    <div className="container max-w-4xl py-8">
+    <div className="container max-w-4xl px-4 py-6 sm:py-8">
 
-
-      <h1 className="mb-6 font-display text-2xl font-semibold text-branch-900">
+<h1 className="mb-5 font-display text-2xl font-semibold text-branch-900 sm:mb-6">
         Messages
       </h1>
 
