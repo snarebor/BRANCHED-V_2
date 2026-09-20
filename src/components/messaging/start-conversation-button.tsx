@@ -68,7 +68,7 @@ export function StartConversationButton({
   }
 
   return (
-    <div className="w-full max-w-sm rounded-xl border border-border bg-background p-3 sm:w-80">
+    <div className="w-full min-w-0 max-w-sm rounded-xl border border-border bg-background p-3 sm:w-80">
       <div className="mb-2 flex items-center justify-between">
         <p className="text-sm font-semibold">
           Send a message
@@ -93,15 +93,15 @@ export function StartConversationButton({
         placeholder="Write your message..."
         maxLength={2000}
         rows={4}
-        className="w-full resize-none rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-branch-500"
+        className="w-full min-w-0 resize-none rounded-lg border border-border bg-card px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-branch-500"
         disabled={sending}
       />
 
-      {error && (
-        <p className="mt-2 text-xs text-destructive">
-          {error}
-        </p>
-      )}
+     {error && (
+  <p className="mt-2 break-words text-xs text-destructive">
+    {error}
+  </p>
+)}
 
       <div className="mt-2 flex justify-end">
         <Button

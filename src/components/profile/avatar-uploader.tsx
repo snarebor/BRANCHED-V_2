@@ -28,7 +28,7 @@ export function AvatarUploader({
   });
 
   return (
-    <label className="group relative flex h-24 w-24 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border bg-branch-100 text-branch-700">
+    <label className="group relative flex h-24 w-24 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border bg-branch-100 text-branch-700">
       {image ? (
         <Image
           src={image}

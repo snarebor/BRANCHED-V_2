@@ -181,19 +181,19 @@ export default async function ProfilePage({
 
   return (
 
-    <div className="container max-w-4xl py-10">
+    <div className="container max-w-4xl px-4 py-6 sm:py-10">
 
 
-      <div className="flex flex-col gap-6 rounded-2xl border border-border bg-card p-6">
+      <div className="flex min-w-0 flex-col gap-6 rounded-2xl border border-border bg-card p-4 sm:p-6">
 
 
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
 
 
-          <div className="flex items-center gap-4">
+          <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
 
 
-            <Avatar className="h-16 w-16">
+            <Avatar className="h-14 w-14 shrink-0 sm:h-16 sm:w-16">
 
               <AvatarImage
                 src={user.image ?? undefined}
@@ -208,22 +208,20 @@ export default async function ProfilePage({
 
 
 
-            <div>
+            <div className="min-w-0 flex-1">
 
 
               <div className="flex flex-wrap items-center gap-2">
 
-  <h1 className="flex items-center gap-1.5 font-display text-xl font-semibold text-branch-900">
-
+  <h1 className="flex min-w-0 items-center gap-1.5 break-words font-display text-xl font-semibold text-branch-900">
+  <span className="min-w-0 break-words">
     {user.name}
+  </span>
 
-    {user.isVerified && (
-
-      <ShieldCheck className="h-5 w-5 text-branch-500" />
-
-    )}
-
-  </h1>
+  {user.isVerified && (
+    <ShieldCheck className="h-5 w-5 shrink-0 text-branch-500" />
+  )}
+</h1>
 
 
   <TrustBadge trust={trustLevel} />
@@ -237,11 +235,11 @@ export default async function ProfilePage({
 
                 {user.location && (
 
-                  <span className="flex items-center gap-1">
+                  <span className="flex min-w-0 items-start gap-1">
 
-                    <MapPin className="h-3.5 w-3.5" />
+                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
 
-                    {user.location}
+                    <span className="break-words">{user.location}</span>
 
                   </span>
 
@@ -251,7 +249,7 @@ export default async function ProfilePage({
 
                 <span className="flex items-center gap-1">
 
-                  <Calendar className="h-3.5 w-3.5" />
+                  <Calendar className="h-3.5 w-3.5 shrink-0" />
 
                   Joined {formatRelativeTime(user.createdAt)}
 
@@ -264,11 +262,9 @@ export default async function ProfilePage({
 
               {user.bio && (
 
-                <p className="mt-2 max-w-md text-sm text-foreground">
-
-                  {user.bio}
-
-                </p>
+                <p className="mt-2 max-w-md break-words whitespace-pre-wrap text-sm text-foreground">
+  {user.bio}
+</p>
 
               )}
 
@@ -281,7 +277,7 @@ export default async function ProfilePage({
 
 
           {isSelf ? (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex w-full flex-wrap gap-2 sm:w-auto">
               <Button
                 variant="outline"
                 size="sm"
@@ -301,7 +297,7 @@ export default async function ProfilePage({
               </Button>
             </div>
           ) : (
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex w-full flex-wrap items-start gap-2 sm:w-auto">
               <StartConversationButton recipientId={user.id} />
 
               <ReportButton
@@ -335,10 +331,10 @@ export default async function ProfilePage({
 
 
       
-      <div className="mt-10">
-        <h2 className="mb-4 font-display text-xl font-semibold text-branch-900">
-          {isSelf ? 'Your listings' : `${user.name}'s listings`}
-        </h2>
+      <div className="mt-8 sm:mt-10">
+        <h2 className="mb-4 break-words font-display text-xl font-semibold text-branch-900">
+  {isSelf ? 'Your listings' : `${user.name}'s listings`}
+</h2>
 
         {user.listings.length > 0 ? (
           <ListingGrid listings={listings as any} />

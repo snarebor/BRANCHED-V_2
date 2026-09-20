@@ -41,11 +41,13 @@ function LoginForm() {
   }
 
   return (
-    <div className="container flex min-h-[70vh] max-w-md flex-col items-center justify-center gap-8 py-16">
+    <div className="container flex min-h-[70vh] max-w-md flex-col items-center justify-center gap-6 px-4 py-8 sm:gap-8 sm:py-16">
       <Logo />
-      <div className="w-full rounded-2xl border border-border bg-card p-8">
+      <div className="w-full min-w-0 rounded-2xl border border-border bg-card p-5 sm:p-8">
         <h1 className="font-display text-2xl font-semibold text-branch-900">Welcome back</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Log in to message sellers and manage your listings.</p>
+        <p className="mt-1 break-words text-sm text-muted-foreground">
+  Log in to message sellers and manage your listings.
+</p>
 
         <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-4">
           <div className="flex flex-col gap-2">
@@ -56,8 +58,12 @@ function LoginForm() {
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
-          {error && <p className="text-sm text-destructive">{error}</p>}
-          <Button type="submit" disabled={loading} className="mt-2">
+          {error && (
+  <p className="break-words text-sm text-destructive">
+    {error}
+  </p>
+)}
+          <Button type="submit" disabled={loading} className="mt-2 w-full">
             {loading ? 'Logging in...' : 'Log in'}
           </Button>
         </form>
@@ -83,7 +89,11 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="container min-h-[70vh] max-w-md py-16" />}>
+    <Suspense
+  fallback={
+    <div className="container min-h-[70vh] max-w-md px-4 py-8 sm:py-16" />
+  }
+>
       <LoginForm />
     </Suspense>
   );

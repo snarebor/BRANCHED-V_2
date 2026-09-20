@@ -120,7 +120,11 @@ export function ReportButton({
               />
             </div>
 
-            {error && <p className="text-sm text-destructive">{error}</p>}
+            {error && (
+  <p className="break-words text-sm text-destructive">
+    {error}
+  </p>
+)}
 
             <Button onClick={submit} disabled={submitting} className="w-full">
               {submitting ? 'Submitting...' : 'Submit report'}

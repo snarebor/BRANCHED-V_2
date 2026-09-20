@@ -94,14 +94,14 @@ export default function EditProfilePage() {
   }
 
   return (
-    <div className="container max-w-lg py-10">
+    <div className="container max-w-lg px-4 py-6 sm:py-10">
       <h1 className="font-display text-2xl font-semibold text-branch-900">
         Edit profile
       </h1>
 
-      <p className="mt-1 text-sm text-muted-foreground">
-        This information is shown on your public profile.
-      </p>
+      <p className="mt-1 break-words text-sm text-muted-foreground">
+  This information is shown on your public profile.
+</p>
 
       <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-6">
         <AvatarUploader
@@ -147,10 +147,10 @@ export default function EditProfilePage() {
         </div>
 
         {error && (
-          <p className="text-sm text-destructive">
-            {error}
-          </p>
-        )}
+  <p className="break-words text-sm text-destructive">
+    {error}
+  </p>
+)}
 
         {saved && (
           <p className="text-sm text-branch-600">
@@ -158,22 +158,27 @@ export default function EditProfilePage() {
           </p>
         )}
 
-        <div className="flex gap-2">
-          <Button type="submit" disabled={saving}>
-            {saving ? 'Saving...' : 'Save changes'}
-          </Button>
+        <div className="flex flex-col gap-2 sm:flex-row">
+  <Button
+    type="submit"
+    disabled={saving}
+    className="w-full sm:w-auto"
+  >
+    {saving ? 'Saving...' : 'Save changes'}
+  </Button>
 
-          {userId && (
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => router.push(`/profile/${userId}`)}
-              disabled={saving}
-            >
-              Cancel
-            </Button>
-          )}
-        </div>
+  {userId && (
+    <Button
+      type="button"
+      variant="outline"
+      onClick={() => router.push(`/profile/${userId}`)}
+      disabled={saving}
+      className="w-full sm:w-auto"
+    >
+      Cancel
+    </Button>
+  )}
+</div>
       </form>
     </div>
   );
