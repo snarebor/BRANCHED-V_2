@@ -30,27 +30,28 @@ export function CookieConsent() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 shadow-lg backdrop-blur">
-      <div className="container mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between">
-        <div className="max-w-3xl text-sm leading-6 text-muted-foreground">
+  <div className="fixed inset-x-0 bottom-0 z-50 p-3 sm:p-4">
+    <div className="mx-auto max-w-5xl rounded-2xl border border-border bg-background/95 shadow-xl backdrop-blur">
+      <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+        <div className="min-w-0 max-w-3xl text-sm leading-6 text-muted-foreground">
           <p>
             Branched uses essential technologies needed for authentication,
             security, session management, and reliable operation. Optional
             cookies will only be used with your permission.
           </p>
 
-          <p className="mt-2">
-            You can learn more in our{' '}
+          <p className="mt-1.5">
+            Learn more in our{' '}
             <Link
               href="/privacy"
-              className="font-medium text-foreground underline underline-offset-4"
+              className="font-medium text-foreground underline underline-offset-4 hover:text-branch-600"
             >
               Privacy Policy
             </Link>{' '}
             and{' '}
             <Link
               href="/terms"
-              className="font-medium text-foreground underline underline-offset-4"
+              className="font-medium text-foreground underline underline-offset-4 hover:text-branch-600"
             >
               Terms & Conditions
             </Link>
@@ -58,24 +59,25 @@ export function CookieConsent() {
           </p>
         </div>
 
-        <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+        <div className="grid shrink-0 grid-cols-2 gap-2 sm:flex">
           <button
             type="button"
             onClick={() => saveConsent('rejected')}
-            className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-muted"
+            className="min-h-11 rounded-xl border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-muted"
           >
-            Reject optional cookies
+            Reject optional
           </button>
 
           <button
             type="button"
             onClick={() => saveConsent('accepted')}
-            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
+            className="min-h-11 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
           >
             Accept
           </button>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
