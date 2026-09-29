@@ -88,7 +88,7 @@ export function NotificationBell() {
   }
 
   return (
-    <div className="relative">
+    <div className="static sm:relative">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
@@ -108,7 +108,7 @@ export function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 z-50 mt-2 w-80 overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
+        <div className="absolute right-4 top-full z-50 mt-2 w-[calc(100%-2rem)] sm:right-0 sm:top-auto sm:w-80 overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
           <div className="flex items-center justify-between border-b border-border px-4 py-3">
             <p className="font-semibold">
               Notifications
@@ -125,7 +125,7 @@ export function NotificationBell() {
             )}
           </div>
 
-          <div className="max-h-96 overflow-y-auto">
+          <div className="max-h-[min(24rem,calc(100dvh-9rem))] overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="px-4 py-8 text-center text-sm text-muted-foreground">
                 No notifications yet.
@@ -142,7 +142,7 @@ export function NotificationBell() {
                   <button
                     type="button"
                     onClick={() => markRead(notification.id)}
-                    className="w-full text-left"
+                    className="w-full text-left [overflow-wrap:anywhere]"
                   >
                     <p className="text-sm font-semibold">
                       {notification.title}

@@ -16,7 +16,7 @@ export default function BrowseLoading() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="h-10 w-48 animate-pulse rounded-full bg-muted" />
 
-          <div className="h-9 w-80 animate-pulse rounded-full bg-muted" />
+          <div className="h-9 w-80 max-w-full animate-pulse rounded-full bg-muted" />
         </div>
       </div>
 

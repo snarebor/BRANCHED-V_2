@@ -55,7 +55,7 @@ export function Toaster() {
     <ToastProvider>
       {toasts.map((toast) => (
         <Toast key={toast.id}>
-          <div className="grid gap-1">
+          <div className="grid min-w-0 gap-1 [overflow-wrap:anywhere]">
             {toast.title && (
               <ToastTitle>{toast.title}</ToastTitle>
             )}

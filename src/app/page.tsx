@@ -506,7 +506,7 @@ export default async function HomePage() {
       <section className="container pb-24">
 
 
-        <div className="mb-6 flex items-end justify-between">
+        <div className="mb-6 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
 
 
           <div>

@@ -41,23 +41,23 @@ export function SearchBar({ compact = false }: { compact?: boolean }) {
         compact ? 'max-w-xl' : 'max-w-2xl'
       }`}
     >
-      <div className="flex flex-1 items-center gap-2 px-3">
+      <div className="flex min-w-0 flex-1 items-center gap-2 px-3">
         <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
         <Input
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search listings — a room, a laptop, a job..."
-          className="h-10 border-0 bg-transparent px-0 shadow-none focus-visible:ring-0"
+          className="h-10 min-w-0 border-0 bg-transparent px-0 shadow-none focus-visible:ring-0"
         />
       </div>
       <div className="hidden h-6 w-px bg-border sm:block" />
-      <div className="flex flex-1 items-center gap-2 px-3 sm:max-w-[200px]">
+      <div className="flex min-w-0 flex-1 items-center gap-2 px-3 sm:max-w-[200px]">
         <MapPin className="h-4 w-4 shrink-0 text-muted-foreground" />
         <Input
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder="City"
-          className="h-10 border-0 bg-transparent px-0 shadow-none focus-visible:ring-0"
+          className="h-10 min-w-0 border-0 bg-transparent px-0 shadow-none focus-visible:ring-0"
         />
       </div>
       <Button type="submit" className="sm:rounded-full" size={compact ? 'default' : 'lg'}>
