@@ -23,7 +23,40 @@ const SORTS = [
   { value: 'price_asc', label: 'Price: low to high' },
   { value: 'price_desc', label: 'Price: high to low' },
 ];
+function getPaginationItems(
+  currentPage: number,
+  totalPages: number
+): Array<number | 'ellipsis'> {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
 
+  if (currentPage <= 4) {
+    return [1, 2, 3, 4, 5, 'ellipsis', totalPages];
+  }
+
+  if (currentPage >= totalPages - 3) {
+    return [
+      1,
+      'ellipsis',
+      totalPages - 4,
+      totalPages - 3,
+      totalPages - 2,
+      totalPages - 1,
+      totalPages,
+    ];
+  }
+
+  return [
+    1,
+    'ellipsis',
+    currentPage - 1,
+    currentPage,
+    currentPage + 1,
+    'ellipsis',
+    totalPages,
+  ];
+}
 
 
 async function getListings(params: {
@@ -864,37 +897,45 @@ params.delete('page');
       );
     })()}
 
-    {Array.from(
-      {
-        length: result.totalPages,
-      },
-      (_, i) => i + 1
-    ).map((p) => {
-      const params = new URLSearchParams();
+    {getPaginationItems(page, result.totalPages).map((item, index) => {
+  if (item === 'ellipsis') {
+    return (
+      <span
+        key={`ellipsis-${index}`}
+        className="flex h-9 w-6 items-center justify-center text-sm text-muted-foreground"
+        aria-hidden="true"
+      >
+        …
+      </span>
+    );
+  }
 
-      Object.entries(searchParams).forEach(([key, value]) => {
-        if (value !== undefined) {
-          params.set(key, value);
-        }
-      });
+  const params = new URLSearchParams();
 
-      params.set('page', String(p));
+  Object.entries(searchParams).forEach(([key, value]) => {
+    if (value !== undefined) {
+      params.set(key, value);
+    }
+  });
 
-      return (
-        <Link
-          key={p}
-          href={`/browse?${params.toString()}`}
-          className={cn(
-            'flex h-9 w-9 items-center justify-center rounded-full text-sm font-medium',
-            p === page
-              ? 'bg-branch-500 text-white'
-              : 'hover:bg-muted'
-          )}
-        >
-          {p}
-        </Link>
-      );
-    })}
+  params.set('page', String(item));
+
+  return (
+    <Link
+      key={item}
+      href={`/browse?${params.toString()}`}
+      aria-current={item === page ? 'page' : undefined}
+      className={cn(
+        'flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-medium',
+        item === page
+          ? 'bg-branch-500 text-white'
+          : 'hover:bg-muted'
+      )}
+    >
+      {item}
+    </Link>
+  );
+})}
 
     {page < result.totalPages && (() => {
       const params = new URLSearchParams();
