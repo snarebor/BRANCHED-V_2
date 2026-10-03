@@ -47,7 +47,7 @@ export function ListingGallery({
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-2 overflow-hidden rounded-2xl sm:grid-rows-2">
+      <div className="grid grid-cols-4 gap-2 overflow-hidden rounded-2xl sm:aspect-[16/9] sm:grid-rows-2">
         {visibleImages.map((src, index) => (
           <button
             key={src + index}
@@ -55,8 +55,8 @@ export function ListingGallery({
             onClick={() => setSelectedIndex(index)}
             className={`relative overflow-hidden bg-muted ${
   index === 0
-    ? 'col-span-4 aspect-[16/10] sm:col-span-2 sm:row-span-2 sm:aspect-auto'
-    : 'col-span-1 aspect-square sm:col-span-1'
+  ? 'col-span-4 aspect-[16/10] sm:col-span-2 sm:row-span-2 sm:aspect-auto'
+  : 'col-span-1 aspect-square sm:col-span-1 sm:aspect-auto'
 }`}
           >
             <Image
