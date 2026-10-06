@@ -17,32 +17,55 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+async function onSubmit(e: React.FormEvent) {
+  e.preventDefault();
 
+  setLoading(true);
+  setError(null);
+
+  try {
     const res = await fetch('/api/register', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
     });
+
     const data = await res.json();
 
     if (!res.ok) {
       setError(data.error ?? 'Something went wrong.');
-      setLoading(false);
       return;
     }
 
-    const signInRes = await signIn('credentials', { email, password, redirect: false });
+    const signInRes = await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    });
+
     if (signInRes?.error) {
       router.push('/login');
       return;
     }
+
     router.push('/');
     router.refresh();
+  } catch (error) {
+    console.error('Registration failed:', error);
+
+    setError(
+      'Could not create your account. Please check your connection and try again.'
+    );
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <div className="container flex min-h-[70vh] max-w-md flex-col items-center justify-center gap-6 px-4 py-8 sm:gap-8 sm:py-16">
