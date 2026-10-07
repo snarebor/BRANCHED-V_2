@@ -6,6 +6,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { CookieConsent } from '@/components/cookie-consent';
+import { Analytics } from "@vercel/analytics/next";
 
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   <CookieConsent />
   <Toaster />
+  <Analytics />
 </body>
     </html>
   );
